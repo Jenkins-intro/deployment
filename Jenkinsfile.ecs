@@ -1,0 +1,39 @@
+pipeline {
+    agent { label 'docker' }
+    
+    environment {
+      AWS = credentials("AWS")
+    }
+    
+    parameters {
+        string(defaultValue: '', description: 'The name of the image', name: 'image')
+        string(defaultValue: 'staging-demo', description: 'The name of the image', name: 'environment')
+        string(defaultValue: '', description: 'The name of the service', name: 'service')
+    }
+    
+    stages {
+        stage("Check Environment") {
+            when {
+                expression {
+                    params.environment == "production-demo"
+                }
+            }
+            steps {
+                input "Deploy ${image} to Production?"
+            }
+        }
+        stage("Deploy") {
+            agent {
+                docker {
+                    reuseNode true
+                    registryUrl 'https://pwolfbees-docker.jfrog.io'
+                    registryCredentialsId 'artifactory'
+                    image 'pwolfbees/tools/ecsdeploy'
+                }
+            }
+            steps {
+                sh "ecs-deploy-py -k AWS_KEY -s AWS_SECRET -c ${params.environment} -n ${params.service} -i ${params.image}"
+            }
+        }
+    }
+}
