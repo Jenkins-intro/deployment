@@ -25,20 +25,21 @@ pipeline {
             }
         }
         stage("Deploy") {
-            agent {
-                docker {
-                    reuseNode true
-                    registryUrl 'https://pwolfbees-docker.jfrog.io'
-                    registryCredentialsId 'artifactory'
-                    image 'pwolfbees/tools/ecsdeploy'
-                }
-            }
+            //agent {
+            //    docker {
+            //        reuseNode true
+            //        registryUrl 'https://pwolfbees-docker.jfrog.io'
+            //        registryCredentialsId 'artifactory'
+            //        image 'pwolfbees/tools/ecsdeploy'
+             //   }
+            //}
             steps {
                 withCredentials([[$class: 'AmazonWebServicesCredentialsBinding', accessKeyVariable: 'AWS_ACCESS_KEY_ID', credentialsId: 'AWS', secretKeyVariable: 'AWS_SECRET_ACCESS_KEY']]) {
                    
                     sh """
-                    ecs-deploy-py -k ${AWS_ACCESS_KEY_ID} -s ${AWS_SECRET_ACCESS_KEY} -c ${params.environment} -n ${params.service} -i ${params.image} -t 240 -v   
-                    """               
+                    $libraryResource(ecs-deploy) -k ${AWS_ACCESS_KEY_ID} -s ${AWS_SECRET_ACCESS_KEY} -c ${params.environment} -n ${params.service} -i ${params.image} -t 240 -v   
+                    """ 
+                    
                 }           
             }
         }
