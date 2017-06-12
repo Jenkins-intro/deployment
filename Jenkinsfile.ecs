@@ -35,7 +35,7 @@ pipeline {
             }
             steps {
                 withCredentials([[$class: 'AmazonWebServicesCredentialsBinding', accessKeyVariable: 'AWS_ACCESS_KEY_ID', credentialsId: 'AWS', secretKeyVariable: 'AWS_SECRET_ACCESS_KEY']]) {
-                    sh "ecs-deploy-py -k ${AWS_ACCESS_KEY_ID} -s ${AWS_SECRET_ACCESS_KEY} -c ${params.environment} -n ${params.service} -i ${params.image} -t '360' -v"     
+                    sh "ecs-deploy-py -k ${AWS_ACCESS_KEY_ID} -s ${AWS_SECRET_ACCESS_KEY} -c ${params.environment} -n ${params.service} -i ${params.image} -t ${360} -v"     
                 }           
             }
         }
