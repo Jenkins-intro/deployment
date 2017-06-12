@@ -37,7 +37,7 @@ pipeline {
                 withCredentials([[$class: 'AmazonWebServicesCredentialsBinding', accessKeyVariable: 'AWS_ACCESS_KEY_ID', credentialsId: 'AWS', secretKeyVariable: 'AWS_SECRET_ACCESS_KEY']]) {
                    
                     sh """
-                    ${libraryResource(ecs-deploy)} -k ${AWS_ACCESS_KEY_ID} -s ${AWS_SECRET_ACCESS_KEY} -c ${params.environment} -n ${params.service} -i ${params.image} -t 240 -v   
+                    ${libraryResource('ecs-deploy')} -k ${AWS_ACCESS_KEY_ID} -s ${AWS_SECRET_ACCESS_KEY} -c ${params.environment} -n ${params.service} -i ${params.image} -t 240 -v   
                     """ 
                     
                 }           
