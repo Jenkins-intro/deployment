@@ -8,8 +8,8 @@ pipeline {
     }
     
     parameters {
-        string(defaultValue: 'gameoflife', description: 'The name of the image', name: 'image')
-        string(defaultValue: 'staging-demo', description: 'The name of the image', name: 'environment')
+        string(defaultValue: 'gameoflife:1.0-SNAPSHOT', description: 'The name of the image', name: 'image')
+        string(defaultValue: 'production-demo', description: 'The name of the image', name: 'environment')
         string(defaultValue: 'sample-webapp', description: 'The name of the service', name: 'service')
     }
     
