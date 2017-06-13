@@ -19,7 +19,7 @@ pipeline {
         stage("Check Environment") {
             when {
                 expression {
-                    params.environment == "production-demo"
+                    params.environment == "gameoflife-prod"
                 }
             }
             steps {
