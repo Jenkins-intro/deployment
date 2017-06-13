@@ -30,7 +30,6 @@ pipeline {
             agent {
                 docker {
                     label 'docker'
-                    args '--entrypoint /ecsdeploy'
                     registryUrl 'https://pwolfbees-docker.jfrog.io'
                     registryCredentialsId 'artifactory'
                     image 'pwolfbees/tools/ecsdeploy'
@@ -39,8 +38,7 @@ pipeline {
             steps {
                 withCredentials([[$class: 'AmazonWebServicesCredentialsBinding', accessKeyVariable: 'AWS_ACCESS_KEY_ID', credentialsId: 'AWS', secretKeyVariable: 'AWS_SECRET_ACCESS_KEY']]) {
                     sh """
-                    docker ps -a
-                    docker images
+                    find ../ -name ecs-deploy
                     ./ecs-deploy -k ${AWS_ACCESS_KEY_ID} -s ${AWS_SECRET_ACCESS_KEY} -c ${params.environment} -n ${params.service} -i ${params.image} -t 360 -v
                     """ 
                 }           
