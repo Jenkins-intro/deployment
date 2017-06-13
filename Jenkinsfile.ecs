@@ -6,9 +6,9 @@ pipeline {
     environment {
         AWS_DEFAULT_REGION = "us-east-1"
     }
-    libraries {
-        lib("pipeline@master")
-    }
+    //libraries {
+   //     lib("pipeline@master")
+    //}
     parameters {
         string(defaultValue: 'gameoflife:1.0-SNAPSHOT', description: 'The name of the image', name: 'image')
         string(defaultValue: 'production-demo', description: 'The name of the image', name: 'environment')
