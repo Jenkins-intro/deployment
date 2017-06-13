@@ -4,7 +4,7 @@ pipeline {
     agent none
     
     environment {
-        AWS_DEFAULT_REGION = "us-east-1"
+        AWS_DEFAULT_REGION = "us-west-2"
     }
     //libraries {
    //     lib("pipeline@master")
@@ -36,7 +36,7 @@ pipeline {
                 }
               }
             steps {
-                withCredentials([[$class: 'AmazonWebServicesCredentialsBinding', accessKeyVariable: 'AWS_ACCESS_KEY_ID', credentialsId: 'AWS', secretKeyVariable: 'AWS_SECRET_ACCESS_KEY']]) {
+                withCredentials([[$class: 'AmazonWebServicesCredentialsBinding', accessKeyVariable: 'AWS_ACCESS_KEY_ID', credentialsId: 'pwolfaws', secretKeyVariable: 'AWS_SECRET_ACCESS_KEY']]) {
                     sh """
                     /ecs-deploy -k ${AWS_ACCESS_KEY_ID} -s ${AWS_SECRET_ACCESS_KEY} -c ${params.environment} -n ${params.service} -i ${params.image} -t 360 -v
                     """ 
