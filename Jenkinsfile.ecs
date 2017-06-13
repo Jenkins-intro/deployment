@@ -42,7 +42,7 @@ pipeline {
                  //   chmod u+x ./ecs-deploy.sh
                   //  ./ecs-deploy.sh -k ${AWS_ACCESS_KEY_ID} -s ${AWS_SECRET_ACCESS_KEY} -c ${params.environment} -n ${params.service} -i ${params.image} -t 240 -v   
                  //   """ 
-                    sh "ecs-deploy-py -k ${AWS_ACCESS_KEY_ID} -s ${AWS_SECRET_ACCESS_KEY} -c ${params.environment} -n ${params.service} -i ${params.image} -t 360.22 -v"
+                    sh "ecs-deploy-py -k ${AWS_ACCESS_KEY_ID} -s ${AWS_SECRET_ACCESS_KEY} -c ${params.environment} -n ${params.service} -i ${params.image} -t $((360.22)) -v"
                     
                 }           
             }
