@@ -23,7 +23,7 @@ pipeline {
                 }
             }
             steps {
-                input "Deploy ${image} to Production?"
+                input "Deploy ${params.image} to Production?"
             }
         }
         stage("Deploy") {
