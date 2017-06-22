@@ -30,8 +30,6 @@ pipeline {
             agent {
                 docker {
                     label 'docker'
-                    registryUrl 'https://pwolfbees-docker.jfrog.io'
-                    registryCredentialsId 'artifactory'
                     image 'pwolfbees/tools/ecsdeploy'
                 }
               }
